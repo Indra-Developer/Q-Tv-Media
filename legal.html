@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Legal & Ethics Center | Q Tv Media Telugu</title>
+    <meta name="description" content="Terms, Privacy, Ethics Code, and Cookie policies for Q Tv Media Telugu.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           01. CSS VARIABLES & DESIGN TOKENS
+           ========================================================================== */
+        :root {
+            --primary: #A91C1E; 
+            --primary-hover: #8A1517;
+            --accent: #00B4D8; 
+            
+            /* Dark Mode Defaults */
+            --bg-base: #121212; 
+            --bg-surface: #1e1e1e; 
+            --bg-elevated: #2a2a2a; 
+            --text-main: #ffffff;
+            --text-muted: #9e9e9e;
+            --glass-bg: rgba(30, 30, 30, 0.7);
+            --glass-border: rgba(0, 180, 216, 0.2); 
+            
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition-fast: 0.3s ease;
+            --nav-height: 80px;
+        }
+
+        [data-theme="light"] {
+            --bg-base: #F4F4F5;
+            --bg-surface: #FFFFFF;
+            --bg-elevated: #E4E4E7;
+            --text-main: #121212; 
+            --text-muted: #52525B;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(169, 28, 30, 0.2); 
+        }
+
+        /* ==========================================================================
+           02. RESET & BASE
+           ========================================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: background-color var(--transition-fast), color var(--transition-fast);
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 800; line-height: 1.2; color: var(--text-main); }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .text-red { color: var(--primary); }
+        .text-cyan { color: var(--accent); }
+        .container { width: 90%; max-width: 1400px; margin: 0 auto; }
+        .grid { display: grid; gap: 2rem; }
+
+        /* ==========================================================================
+           03. NAVIGATION & LOGO
+           ========================================================================== */
+        .navbar {
+            position: fixed; top: 0; width: 100%; height: var(--nav-height);
+            z-index: 1000; transition: var(--transition-fast);
+            background: rgba(30, 30, 30, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--text-main) !important;
+        }
+        [data-theme="light"] .navbar { background: rgba(255, 255, 255, 0.98); }
+        
+        .nav-content { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+        .brand { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { font-weight: 600; font-size: 0.9rem; text-transform: uppercase; position: relative; }
+        .nav-links a:hover { color: var(--accent); }
+        .theme-toggle { background: none; border: none; color: inherit; font-size: 1.2rem; cursor: pointer; transition: color 0.3s; }
+        .theme-toggle:hover { color: var(--accent); }
+
+        /* ==========================================================================
+           04. LEGAL HEADER
+           ========================================================================== */
+        .legal-header {
+            padding: 12rem 0 4rem;
+            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-base) 100%);
+            border-bottom: 1px solid var(--glass-border);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .legal-header::before {
+            content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
+            width: 600px; height: 600px; background: radial-gradient(circle, rgba(169,28,30,0.1) 0%, transparent 70%); pointer-events: none;
+        }
+        .legal-title { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: -1px; }
+        .legal-subtitle { font-size: 1.1rem; color: var(--text-muted); max-width: 700px; margin: 0 auto; }
+
+        /* ==========================================================================
+           05. LEGAL HUB LAYOUT (SIDEBAR + CONTENT)
+           ========================================================================== */
+        .legal-hub { padding: 4rem 0; }
+        .legal-grid { grid-template-columns: 300px 1fr; gap: 4rem; align-items: start; }
+        
+        /* Sidebar Navigation */
+        .legal-sidebar {
+            background: var(--bg-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem 0;
+            position: sticky;
+            top: 100px;
+        }
+        .legal-nav-item {
+            display: flex; align-items: center; gap: 15px;
+            padding: 1rem 2rem;
+            font-family: var(--font-heading); font-weight: 600; font-size: 1rem;
+            color: var(--text-muted);
+            border-left: 3px solid transparent;
+            cursor: pointer; transition: var(--transition-fast);
+        }
+        .legal-nav-item i { font-size: 1.2rem; width: 20px; text-align: center; }
+        .legal-nav-item:hover { color: var(--text-main); background: rgba(0, 180, 216, 0.05); }
+        .legal-nav-item.active {
+            color: var(--primary);
+            border-left-color: var(--primary);
+            background: rgba(169, 28, 30, 0.05);
+        }
+
+        /* Document Content Area */
+        .document-view {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+        .document-view.active { display: block; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .doc-meta { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between;}
+        
+        .doc-content h2 { font-size: 2rem; margin: 3rem 0 1.5rem; color: var(--primary); }
+        .doc-content h2:first-child { margin-top: 0; }
+        .doc-content h3 { font-size: 1.3rem; margin: 2rem 0 1rem; color: var(--text-main); }
+        .doc-content p { margin-bottom: 1.5rem; font-size: 1.05rem; line-height: 1.8; color: var(--text-muted); }
+        .doc-content ul { margin: 1rem 0 2rem 2rem; list-style-type: disc; color: var(--text-muted); }
+        .doc-content ul li { margin-bottom: 0.8rem; font-size: 1.05rem; line-height: 1.8; }
+        .doc-content strong { color: var(--text-main); }
+
+        .highlight-box {
+            background: var(--bg-elevated); border-left: 4px solid var(--accent);
+            padding: 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0;
+        }
+        .highlight-box p { margin: 0; color: var(--text-main); font-weight: 500; font-style: italic; }
+
+        /* ==========================================================================
+           06. FOOTER
+           ========================================================================== */
+        .footer { 
+            background: var(--bg-surface); padding: 4rem 0 2rem; 
+            border-top: 2px solid var(--primary); margin-top: 4rem;
+        }
+        .footer-bottom { border-top: 1px solid var(--glass-border); padding-top: 2rem; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+
+        /* ==========================================================================
+           07. RESPONSIVE
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .legal-grid { grid-template-columns: 250px 1fr; gap: 2rem; }
+        }
+        @media (max-width: 768px) {
+            .legal-grid { grid-template-columns: 1fr; }
+            .legal-sidebar { 
+                position: static; padding: 1rem; display: flex; 
+                overflow-x: auto; white-space: nowrap; border-radius: 8px;
+            }
+            .legal-nav-item { border-left: none; border-bottom: 3px solid transparent; padding: 1rem; }
+            .legal-nav-item.active { border-left: none; border-bottom-color: var(--primary); }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <nav class="navbar" id="navbar">
+        <div class="container nav-content">
+            <a href="/" class="brand">
+                <img src="./img/original.png" alt="Q Tv Logo" class=""
+                    onerror="this.src='https://placehold.co/100x40/0A192F/FFF?text=QTv'" style="height: 60px; width: auto;">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Back to Home</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="legal-header">
+        <div class="container">
+            <h1 class="legal-title">Legal & <span class="text-red">Ethics Center</span></h1>
+            <p class="legal-subtitle">Transparency is the foundation of trust. Explore our governing policies, editorial methodologies, and legal frameworks.</p>
+        </div>
+    </header>
+
+    <section class="legal-hub container">
+        <div class="grid legal-grid">
+            
+            <aside class="legal-sidebar">
+                <div class="legal-nav-item active" data-target="terms">
+                    <i class="fas fa-file-contract"></i> Terms of Service
+                </div>
+                <div class="legal-nav-item" data-target="privacy">
+                    <i class="fas fa-user-shield"></i> Privacy Policy
+                </div>
+                <div class="legal-nav-item" data-target="ethics">
+                    <i class="fas fa-balance-scale"></i> Editorial Ethics Code
+                </div>
+                <div class="legal-nav-item" data-target="cookies">
+                    <i class="fas fa-cookie-bite"></i> Cookie Policy
+                </div>
+            </aside>
+
+            <main class="legal-content">
+
+                <article class="document-view active" id="terms">
+                    <div class="doc-meta">
+                        <span>Document ID: QTV-TOS-001</span>
+                        <span>Effective Date: January 1, 2026</span>
+                    </div>
+                    <div class="doc-content">
+                        <h2>Terms of Service</h2>
+                        <p>Welcome to Q Tv Media Telugu. By accessing our digital platform, mobile applications, or utilizing our secure WhatsApp dispatch network, you agree to comply with and be bound by the following terms and conditions of use. Please read these terms carefully before consuming our journalism.</p>
+
+                        <h3>1. Acceptance of Terms</h3>
+                        <p>Your access to and use of Q Tv Media's digital infrastructure is conditioned on your acceptance of and compliance with these Terms. These apply to all visitors, subscribers, stringers, and others who access our network. If you disagree with any part of the terms, you may not access the service.</p>
+
+                        <h3>2. Copyright & Intellectual Property</h3>
+                        <p>All content distributed by Q Tv Media—including ground reports, exclusive interviews, textual analysis, infographics, and broadcast streams—is the exclusive property of Q Tv Media Telugu unless explicitly stated otherwise. The compilation and architecture of this site is protected by Indian and international copyright laws.</p>
+                        <ul>
+                            <li><strong>Permitted Use:</strong> You may share our content via provided social sharing modules or deep-linking directly to our official URLs.</li>
+                            <li><strong>Prohibited Use:</strong> You may not scrape, download, re-edit, or broadcast our proprietary video feeds on third-party channels (including unauthorized YouTube re-uploads) without written syndication agreements.</li>
+                        </ul>
+
+                        <h3>3. User Submissions & Secure Dispatch</h3>
+                        <p>When utilizing our WhatsApp "Secure Dispatch" tip line or submitting content/grievances to our Public Voice vector:</p>
+                        <ul>
+                            <li>You grant Q Tv Media a non-exclusive, royalty-free license to use, verify, and broadcast the submitted media/information in our reporting.</li>
+                            <li>You affirm that you have the right to share the submitted information and that it does not violate any third-party privacy or copyright laws.</li>
+                            <li>Q Tv Media reserves the absolute right to verify, edit, or reject any public submission based on our Editorial Ethics Code.</li>
+                        </ul>
+
+                        <div class="highlight-box">
+                            <p>"We protect our sources. If you submit a news tip marked 'Confidential' via our encrypted tip desk, your identity is legally and technologically firewalled from the public broadcast."</p>
+                        </div>
+
+                        <h3>4. Platform Availability</h3>
+                        <p>While we pride ourselves on a 99% uptime via our proprietary CDN routing, Q Tv Media does not guarantee that the platform will be uninterrupted or error-free at all times. We reserve the right to suspend streaming services for essential technical maintenance without prior notice.</p>
+                    </div>
+                </article>
+
+                <article class="document-view" id="privacy">
+                    <div class="doc-meta">
+                        <span>Document ID: QTV-PRV-002</span>
+                        <span>Effective Date: January 1, 2026</span>
+                    </div>
+                    <div class="doc-content">
+                        <h2>Privacy Policy</h2>
+                        <p>Q Tv Media Telugu respects your privacy as highly as we respect the truth. This policy outlines how we collect, use, and protect your digital footprint when you interact with our news network.</p>
+
+                        <h3>1. Information We Collect</h3>
+                        <p>We believe in minimal data collection. We only gather what is strictly necessary to deliver high-fidelity digital reporting to your device.</p>
+                        <ul>
+                            <li><strong>Telemetry Data:</strong> Device type, browser type, and network bandwidth. We use this exclusively to optimize video streaming quality (e.g., dynamically shifting from 4K to 720p in low-bandwidth rural areas).</li>
+                            <li><strong>Location Data:</strong> Non-precise, regional location data (e.g., district level) to route relevant local breaking news alerts (e.g., Srikakulam vs. Hyderabad feeds).</li>
+                            <li><strong>Voluntary Dispatch Data:</strong> Information you voluntarily provide when contacting our news desk, such as your name, email, or WhatsApp number.</li>
+                        </ul>
+
+                        <h3>2. How We Use Your Data</h3>
+                        <p>Your data is used strictly to enhance your journalism consumption experience. <strong>We do not sell your personal data to political parties, data brokers, or third-party marketing firms.</strong></p>
+                        <ul>
+                            <li>To deliver customized, latency-free news streams based on your region.</li>
+                            <li>To securely process news tips and follow-ups.</li>
+                            <li>To defend our platform against DDoS attacks or scraping bots.</li>
+                        </ul>
+
+                        <h3>3. Third-Party Integrations</h3>
+                        <p>Our platform may utilize third-party infrastructure (such as WhatsApp API for dispatch, and secure cloud servers for video hosting). These entities are contractually bound to strictly process data according to our guidelines and cannot use Q Tv Media audience data for independent profiling.</p>
+
+                        <h3>4. Your Rights</h3>
+                        <p>Under applicable data protection frameworks in India (including the DPDP Act), you maintain the right to request access to the personal data we hold about you, or request its immediate deletion from our tip-line servers. Contact <strong>privacy@qtvmedia.in</strong> for compliance requests.</p>
+                    </div>
+                </article>
+
+                <article class="document-view" id="ethics">
+                    <div class="doc-meta">
+                        <span>Document ID: QTV-ETH-003</span>
+                        <span>Effective Date: January 1, 2026</span>
+                    </div>
+                    <div class="doc-content">
+                        <h2>Editorial Ethics Code</h2>
+                        <p>The foundation of Q Tv Media is built upon an uncompromising ethical framework. In an era plagued by algorithmic misinformation and theatrical studio debates, this document serves as our binding covenant with the people of Andhra Pradesh and Telangana.</p>
+
+                        <div class="highlight-box">
+                            <p>"Speed is our weapon. Truth is our absolute shield. We do not manufacture outrage; we report reality."</p>
+                        </div>
+
+                        <h3>1. The "No-Shouting" Policy</h3>
+                        <p>Our constructive debates and hotseat interviews strictly enforce a "No-Shouting" mandate. We believe the public deserves intellectual rigor and evidence-based arguments. Any guest or anchor who resorts to aggressive verbal theatricality in lieu of facts will be muted or removed from the broadcast. We moderate for substance, not spectacle.</p>
+
+                        <h3>2. Editorial Independence</h3>
+                        <p>The Q Tv Media Editorial Board operates in total isolation from our advertising and corporate partnership departments. No political party, corporate sponsor, or government entity has the power to dictate, preview, or alter our reporting before or after it is published.</p>
+
+                        <h3>3. Ground Zero Verification</h3>
+                        <p>We do not aggregate news from unverified social media handles. A breaking news story is not broadcasted until it is visually authenticated by our Ground Zero Correspondent network deployed across the 26 districts of AP and the districts of Telangana, or verified through primary official documentation.</p>
+
+                        <h3>4. Protection of Anonymous Sources</h3>
+                        <p>Journalism relies on brave whistleblowers. If an individual provides critical socio-political intel to our Secure Dispatch desk under the condition of anonymity, Q Tv Media will defend their identity to the fullest extent of the law. Their data is encrypted, and their voice/visuals will be technologically masked prior to any public broadcast.</p>
+
+                        <h3>5. Unambiguous Corrections</h3>
+                        <p>Absolute truth requires absolute humility. If our data desk makes an error in reporting, we will not silently edit the article or delete the video. We will issue a prominent, timestamped correction across all our digital distribution vectors. We owe our audience accuracy over ego.</p>
+                    </div>
+                </article>
+
+                <article class="document-view" id="cookies">
+                    <div class="doc-meta">
+                        <span>Document ID: QTV-CKI-004</span>
+                        <span>Effective Date: January 1, 2026</span>
+                    </div>
+                    <div class="doc-content">
+                        <h2>Cookie Policy</h2>
+                        <p>To ensure our digital infrastructure operates at zero latency, Q Tv Media utilizes cookies and similar tracking technologies. This policy explains what they are, why we use them, and how you can control them.</p>
+
+                        <h3>1. What are Cookies?</h3>
+                        <p>Cookies are small text files placed on your device by your browser when you visit our network. They allow our servers to remember your device state, ensuring you don't have to re-select your preferred language, region, or theme (Dark/Light mode) upon every visit.</p>
+
+                        <h3>2. Types of Cookies We Use</h3>
+                        <ul>
+                            <li><strong>Strictly Necessary Cookies:</strong> Essential for the core operation of the platform. This includes load-balancing tokens that connect you to our fastest regional CDN server, and security cookies that prevent cross-site request forgery. These cannot be disabled.</li>
+                            <li><strong>Performance & Analytics Cookies:</strong> Used internally by our engineering team to monitor site uptime, video buffering rates, and crash diagnostics. These help us fix network latency in rural areas.</li>
+                            <li><strong>Functionality Cookies:</strong> Remembers your interface preferences (e.g., your choice of the 'Dark Carbon' theme).</li>
+                        </ul>
+
+                        <div class="highlight-box">
+                            <p>"Notice: Q Tv Media does NOT deploy invasive third-party tracking cookies designed to follow you across the internet for targeted advertising."</p>
+                        </div>
+
+                        <h3>3. Managing Your Preferences</h3>
+                        <p>You have full control over non-essential cookies. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, please note that if you disable essential cookies, our video players may experience buffering issues, and your theme preferences will not be saved.</p>
+                    </div>
+                </article>
+
+            </main>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2026 Q Tv Media Telugu. All rights reserved. Architected for speed and truth.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Theme Toggle Logic (Preserved from homepage)
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const body = document.body;
+            const icon = themeToggleBtn.querySelector('i');
+
+            const savedTheme = localStorage.getItem('qtv-theme') || 'dark';
+            body.setAttribute('data-theme', savedTheme);
+            updateIcon(savedTheme);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('qtv-theme', newTheme);
+                updateIcon(newTheme);
+            });
+
+            function updateIcon(theme) {
+                if (theme === 'light') {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                } else {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+            }
+
+            // 2. Legal Hub Routing (Sidebar Tabs)
+            const navItems = document.querySelectorAll('.legal-nav-item');
+            const documentViews = document.querySelectorAll('.document-view');
+
+            // Function to switch active document
+            function switchDocument(targetId) {
+                // Update Sidebar UI
+                navItems.forEach(item => {
+                    if (item.getAttribute('data-target') === targetId) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+
+                // Update Content UI
+                documentViews.forEach(view => {
+                    if (view.id === targetId) {
+                        view.classList.add('active');
+                    } else {
+                        view.classList.remove('active');
+                    }
+                });
+
+                // Smooth scroll to top of content area on mobile
+                if (window.innerWidth <= 768) {
+                    const contentArea = document.querySelector('.legal-content');
+                    contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+
+            // Add click listeners to sidebar items
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const target = item.getAttribute('data-target');
+                    switchDocument(target);
+                    // Update URL hash for link sharing (e.g. site.com/legal#privacy-policy)
+                    window.history.replaceState(null, null, `#${target}`);
+                });
+            });
+
+            // 3. Handle URL Hash on Initial Load
+            // If someone links directly to legal.html#ethics
+            const hash = window.location.hash.replace('#', '');
+            const validTargets = ['terms', 'privacy', 'ethics', 'cookies'];
+            
+            if (hash && validTargets.includes(hash)) {
+                switchDocument(hash);
+            }
+        });
+    </script>
+</body>
+</html>

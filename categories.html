@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>News Vectors | Q Tv Media Telugu</title>
+    <meta name="description" content="Explore Political Coverage, Andhra News, Telangana News, and Special Interviews from Q Tv Media.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           01. CSS VARIABLES & DESIGN TOKENS
+           ========================================================================== */
+        :root {
+            --primary: #A91C1E; 
+            --accent: #00B4D8; 
+            
+            /* Dark Mode Defaults */
+            --bg-base: #121212; 
+            --bg-surface: #1e1e1e; 
+            --bg-elevated: #2a2a2a; 
+            --text-main: #ffffff;
+            --text-muted: #9e9e9e;
+            --glass-border: rgba(0, 180, 216, 0.2); 
+            
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition-fast: 0.3s ease;
+            --transition-bounce: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --nav-height: 80px;
+        }
+
+        [data-theme="light"] {
+            --bg-base: #F4F4F5;
+            --bg-surface: #FFFFFF;
+            --bg-elevated: #E4E4E7;
+            --text-main: #121212; 
+            --text-muted: #52525B;
+            --glass-border: rgba(169, 28, 30, 0.2); 
+        }
+
+        /* ==========================================================================
+           02. RESET & BASE
+           ========================================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: background-color var(--transition-fast), color var(--transition-fast);
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 800; line-height: 1.2; color: var(--text-main); }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .text-red { color: var(--primary); }
+        .text-cyan { color: var(--accent); }
+        .container { width: 90%; max-width: 1400px; margin: 0 auto; }
+
+        /* ==========================================================================
+           03. NAVIGATION
+           ========================================================================== */
+        .navbar {
+            position: fixed; top: 0; width: 100%; height: var(--nav-height);
+            z-index: 1000; transition: var(--transition-fast);
+            background: rgba(30, 30, 30, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--text-main) !important;
+        }
+        [data-theme="light"] .navbar { background: rgba(255, 255, 255, 0.98); }
+        
+        .nav-content { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+        .brand { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { font-weight: 600; font-size: 0.9rem; text-transform: uppercase; position: relative; transition: color var(--transition-fast);}
+        .nav-links a:hover { color: var(--accent); }
+        .theme-toggle { background: none; border: none; color: inherit; font-size: 1.2rem; cursor: pointer; transition: color 0.3s; }
+        .theme-toggle:hover { color: var(--accent); }
+
+        /* ==========================================================================
+           04. HEADER SECTION (Typographic)
+           ========================================================================== */
+        .hub-header {
+            padding: 12rem 0 4rem;
+            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-base) 100%);
+            position: relative;
+            text-align: center;
+            border-bottom: 1px solid var(--glass-border);
+            overflow: hidden;
+        }
+        .hub-header::before {
+            content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
+            width: 800px; height: 800px; background: radial-gradient(circle, rgba(0,180,216,0.05) 0%, transparent 70%); pointer-events: none;
+        }
+        .header-content { position: relative; z-index: 2; }
+        .hub-title { font-size: clamp(3rem, 6vw, 5.5rem); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: -2px; line-height: 1; }
+        .hub-subtitle { font-size: 1.2rem; color: var(--text-muted); max-width: 800px; margin: 0 auto; font-weight: 300;}
+
+        /* ==========================================================================
+           05. HUB LAYOUT (SIDEBAR + CONTENT)
+           ========================================================================== */
+        .news-hub { padding: 4rem 0; }
+        .hub-grid { display: grid; grid-template-columns: 280px 1fr; gap: 4rem; align-items: start; }
+        
+        /* Sidebar Navigation */
+        .hub-sidebar {
+            background: var(--bg-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 100px;
+        }
+        .hub-nav-item {
+            display: flex; align-items: center; gap: 15px;
+            padding: 1.2rem 2rem;
+            font-family: var(--font-heading); font-weight: 600; font-size: 0.95rem; text-transform: uppercase;
+            color: var(--text-muted);
+            border-left: 3px solid transparent;
+            cursor: pointer; transition: var(--transition-fast);
+        }
+        .hub-nav-item i { font-size: 1.2rem; width: 25px; text-align: center; transition: transform var(--transition-bounce);}
+        .hub-nav-item:hover { color: var(--text-main); background: rgba(0, 180, 216, 0.05); }
+        .hub-nav-item:hover i { transform: translateX(5px); color: var(--accent); }
+        .hub-nav-item.active {
+            color: var(--primary);
+            border-left-color: var(--primary);
+            background: rgba(169, 28, 30, 0.05);
+        }
+
+        /* Category Views */
+        .category-view { display: none; animation: fadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        .category-view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ==========================================================================
+           06. THEORY CARDS & PATTERNS (NO IMAGES)
+           ========================================================================== */
+        .category-header { margin-bottom: 3rem; padding-bottom: 1rem; border-bottom: 1px solid var(--glass-border); }
+        .category-header h2 { font-size: 2.5rem; color: var(--text-main); display: flex; align-items: center; gap: 15px;}
+        .category-header h2 i { color: var(--primary); }
+        .category-desc { font-size: 1.1rem; color: var(--text-muted); margin-top: 15px; max-width: 800px; line-height: 1.8;}
+
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2.5rem; }
+        
+        /* Base Card Styling */
+        .theory-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all var(--transition-bounce);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            min-height: 320px;
+        }
+
+        /* Hover Animations */
+        .theory-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        [data-theme="light"] .theory-card:hover { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
+
+        /* Background Pattern Pseudo-elements */
+        .theory-card::before {
+            content: ''; position: absolute; inset: 0; z-index: -1;
+            opacity: 0.15; transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .theory-card:hover::before { opacity: 0.6; transform: scale(1.1); }
+
+        /* Pattern 1: Tech Dots */
+        .pattern-dots::before {
+            background-image: radial-gradient(var(--glass-border) 2px, transparent 2px);
+            background-size: 25px 25px;
+        }
+        
+        /* Pattern 2: Blueprint Grid */
+        .pattern-grid::before {
+            background-image: 
+                linear-gradient(var(--glass-border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.1;
+        }
+
+        /* Pattern 3: Warning Diagonals */
+        .pattern-diagonal::before {
+            background-image: repeating-linear-gradient(
+                45deg, 
+                rgba(169, 28, 30, 0.03) 0, 
+                rgba(169, 28, 30, 0.03) 2px, 
+                transparent 2px, 
+                transparent 15px
+            );
+        }
+
+        /* Pattern 4: Cyan Radial Glow */
+        .pattern-glow::before {
+            background: radial-gradient(circle at 100% 100%, rgba(0, 180, 216, 0.15) 0%, transparent 60%);
+        }
+
+        /* Card Content Typography */
+        .card-meta { 
+            display: flex; align-items: center; gap: 10px;
+            font-size: 0.85rem; color: var(--accent); font-weight: 700; 
+            margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px;
+            transition: color var(--transition-fast);
+        }
+        .theory-card:hover .card-meta { color: var(--primary); }
+        .card-meta i { font-size: 1.2rem; }
+        
+        .card-title { font-size: 1.5rem; margin-bottom: 1rem; line-height: 1.3; color: var(--text-main); }
+        .card-excerpt { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; flex-grow: 1; }
+        
+        /* Featured Layout (Top theory block) */
+        .featured-card {
+            background: var(--bg-elevated); border: 1px solid var(--primary);
+            border-radius: 16px; padding: 4rem; margin-bottom: 4rem;
+            position: relative; overflow: hidden; z-index: 1;
+            transition: all var(--transition-bounce);
+            cursor: pointer;
+        }
+        .featured-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+        .featured-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(169,28,30,0.15); }
+        .featured-card .card-title { font-size: 2.5rem; margin-bottom: 1.5rem; letter-spacing: -1px;}
+        .featured-card .card-excerpt { font-size: 1.2rem; max-width: 900px;}
+        
+        .live-badge { background: var(--primary); color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; animation: pulse 2s infinite; display: inline-block;}
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        /* Icon Reveal on Hover */
+        .reveal-icon {
+            position: absolute; bottom: -40px; right: 30px;
+            font-size: 4rem; color: rgba(255,255,255,0.03);
+            transition: all var(--transition-bounce);
+            z-index: -1;
+        }
+        [data-theme="light"] .reveal-icon { color: rgba(0,0,0,0.03); }
+        .theory-card:hover .reveal-icon { bottom: 20px; color: rgba(0, 180, 216, 0.1); transform: rotate(-15deg); }
+
+        /* ==========================================================================
+           07. FOOTER
+           ========================================================================== */
+        .footer { 
+            background: var(--bg-surface); padding: 3rem 0; 
+            border-top: 1px solid var(--glass-border); margin-top: 4rem;
+            text-align: center;
+        }
+
+        /* ==========================================================================
+           08. RESPONSIVE
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .featured-card { padding: 3rem; }
+            .featured-card .card-title { font-size: 2rem; }
+        }
+        @media (max-width: 768px) {
+            .hub-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .hub-sidebar { 
+                position: static; padding: 0.5rem; display: flex; 
+                overflow-x: auto; white-space: nowrap; border-radius: 8px;
+                scrollbar-width: none;
+            }
+            .hub-sidebar::-webkit-scrollbar { display: none; }
+            .hub-nav-item { border-left: none; border-bottom: 3px solid transparent; padding: 1rem; font-size: 0.85rem;}
+            .hub-nav-item.active { border-left: none; border-bottom-color: var(--primary); background: transparent;}
+            .nav-links { display: none; }
+            .category-header h2 { font-size: 2rem; }
+            .featured-card { padding: 2rem; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <nav class="navbar" id="navbar">
+        <div class="container nav-content">
+            <a href="/" class="brand">
+                <img src="./img/original.png" alt="Q Tv Logo" class=""
+                    onerror="this.src='https://placehold.co/100x40/0A192F/FFF?text=QTv'" style="height: 60px; width: auto;">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/legal.html">Legal & Ethics</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hub-header">
+        <div class="container header-content">
+            <h1 class="hub-title">The <span class="text-cyan">Intelligence</span> Grid</h1>
+            <p class="hub-subtitle">Navigate our specialized reporting vectors. Unfiltered reality, deep theoretical analysis, and strict data-driven journalism completely devoid of visual distraction.</p>
+        </div>
+    </header>
+
+    <section class="news-hub container">
+        <div class="hub-grid">
+            
+            <aside class="hub-sidebar">
+                <div class="hub-nav-item active" data-target="politics">
+                    <i class="fas fa-landmark"></i> Political Coverage
+                </div>
+                <div class="hub-nav-item" data-target="andhra">
+                    <i class="fas fa-map-marked-alt"></i> Andhra News
+                </div>
+                <div class="hub-nav-item" data-target="telangana">
+                    <i class="fas fa-city"></i> Telangana News
+                </div>
+                <div class="hub-nav-item" data-target="interviews">
+                    <i class="fas fa-microphone-alt"></i> Special Interviews
+                </div>
+            </aside>
+
+            <main class="hub-content">
+
+                <div class="category-view active" id="politics">
+                    <div class="category-header">
+                        <h2><i class="fas fa-landmark"></i> Political Architecture</h2>
+                        <p class="category-desc">Deep dives into the political machinations of the Telugu states. Policy analysis, manifesto tracking, and strictly data-driven governance reviews. No shouting, just strategy and theoretical breakdown.</p>
+                    </div>
+
+                    <article class="featured-card pattern-grid">
+                        <div class="card-meta"><span class="live-badge">CORE ANALYSIS</span> <i class="fas fa-file-signature"></i> Policy Desk</div>
+                        <h3 class="card-title">The Fiscal Reality of the New Welfare Manifesto: A Data Desk Breakdown</h3>
+                        <p class="card-excerpt">Stripping away campaign rhetoric, our data analysts run the macroeconomic numbers on the newly proposed state welfare schemes. We examine the mathematical viability of direct benefit transfers, identifying exactly where the capital originates, the projected deficit over the next 5 years, and the inevitable impact on regional inflation. This is governance reduced to pure mathematics.</p>
+                        <i class="fas fa-chart-line reveal-icon" style="font-size: 10rem; opacity: 0.2; bottom: -50px; right: -20px;"></i>
+                    </article>
+
+                    <div class="news-grid">
+                        <article class="theory-card pattern-dots">
+                            <div class="card-meta"><i class="fas fa-vote-yea"></i> Electoral Matrix</div>
+                            <h4 class="card-title">Shifting Alliances: The Rural Vote Bank Algorithm</h4>
+                            <p class="card-excerpt">Ground reporting intersects with demographic data to indicate a massive shift in voter sentiment within key agricultural belts. We analyze the historical voting patterns against current grievance metrics to predict structural shifts in the upcoming assembly sessions.</p>
+                            <i class="fas fa-users reveal-icon"></i>
+                        </article>
+                        
+                        <article class="theory-card pattern-diagonal">
+                            <div class="card-meta"><i class="fas fa-gavel"></i> Legislative Tracking</div>
+                            <h4 class="card-title">Assembly Watch: The Implications of Midnight Amendments</h4>
+                            <p class="card-excerpt">A critical, clause-by-clause dissection of the new land acquisition amendments passed without opposition debate. We outline the legal loopholes, the immediate threat to specific coastal zones, and the theoretical impact on foreign direct investment.</p>
+                            <i class="fas fa-balance-scale reveal-icon"></i>
+                        </article>
+                        
+                        <article class="theory-card pattern-glow">
+                            <div class="card-meta"><i class="fas fa-chess-knight"></i> Internal Party Dynamics</div>
+                            <h4 class="card-title">The Shadow Cabinet: Power Restructuring Post-Plenary</h4>
+                            <p class="card-excerpt">An organizational analysis of the recent high-command reshuffle. By tracking portfolio reassignments and historical loyalties, we map the new hierarchy of decision-makers operating behind the public faces of the ruling administration.</p>
+                            <i class="fas fa-sitemap reveal-icon"></i>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="category-view" id="andhra">
+                    <div class="category-header">
+                        <h2><i class="fas fa-map-marked-alt"></i> Andhra Nexus</h2>
+                        <p class="category-desc">Comprehensive reporting mapping all 26 districts of Andhra Pradesh. From the industrial blueprints of Visakhapatnam to the shifting agricultural economics of Rayalaseema.</p>
+                    </div>
+
+                    <article class="featured-card pattern-glow">
+                        <div class="card-meta"><i class="fas fa-industry"></i> Infrastructure Architecture</div>
+                        <h3 class="card-title">Visakhapatnam IT Corridor Expansion: Blueprint vs Reality</h3>
+                        <p class="card-excerpt">Q Tv Media investigates the actual ground progress of the newly proposed tech parks in Vizag. Bypassing press releases, we compare the architectural blueprints against current structural realities. Are multinational corporations actively establishing server farms, or is the current activity purely speculative real estate inflation?</p>
+                        <i class="fas fa-building reveal-icon" style="font-size: 10rem; opacity: 0.2; bottom: -50px; right: -20px;"></i>
+                    </article>
+
+                    <div class="news-grid">
+                        <article class="theory-card pattern-diagonal">
+                            <div class="card-meta"><i class="fas fa-seedling"></i> Rayalaseema Economics</div>
+                            <h4 class="card-title">Drought Mitigation: The Hydro-Engineering of New Tunnels</h4>
+                            <p class="card-excerpt">A deep theoretical review of the engineering specifications behind the massive tunnel projects aiming to permanently reroute water logic in the Rayalaseema region. We examine flow-rate estimates and structural geology reports.</p>
+                            <i class="fas fa-water reveal-icon"></i>
+                        </article>
+                        
+                        <article class="theory-card pattern-grid">
+                            <div class="card-meta"><i class="fas fa-bus-alt"></i> Tirupati Logistics</div>
+                            <h4 class="card-title">Modernizing Pilgrim Transport: The EV Transit Network</h4>
+                            <p class="card-excerpt">An analysis of the operational logistics required to transition the entire Tirumala fleet to electric vehicles. We break down the required grid capacity, charging infrastructure placement, and the mathematical modeling of daily devotee influx.</p>
+                            <i class="fas fa-charging-station reveal-icon"></i>
+                        </article>
+                        
+                        <article class="theory-card pattern-dots">
+                            <div class="card-meta"><i class="fas fa-fish"></i> Coastal Economy</div>
+                            <h4 class="card-title">The Aquaculture Export Policy Shift</h4>
+                            <p class="card-excerpt">Examining the new international quality control mandates placed on Andhra's shrimp exporters. We detail the biochemical testing requirements and the financial strain on small-scale hatcheries attempting to meet global standards.</p>
+                            <i class="fas fa-ship reveal-icon"></i>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="category-view" id="telangana">
+                    <div class="category-header">
+                        <h2><i class="fas fa-city"></i> Telangana Dynamics</h2>
+                        <p class="category-desc">Tracking the rapid, globalized urbanization of Hyderabad and the parallel socio-economic development of rural Telangana. Examining tech policy, heritage conservation, and regional growth metrics.</p>
+                    </div>
+
+                    <article class="featured-card pattern-grid">
+                        <div class="card-meta"><i class="fas fa-project-diagram"></i> Urban Planning</div>
+                        <h3 class="card-title">Beyond the Ring Road: The Topology of Hyderabad's Expansion</h3>
+                        <p class="card-excerpt">As the western IT corridor reaches critical density, we analyze the structural logic of the government's "Look East" policy. Utilizing urban sprawl data and traffic flow algorithms, we predict the next decade of commercial zoning and the necessary upgrades required for the city's underlying water and power grids.</p>
+                        <i class="fas fa-network-wired reveal-icon" style="font-size: 10rem; opacity: 0.2; bottom: -50px; right: -20px;"></i>
+                    </article>
+
+                    <div class="news-grid">
+                        <article class="theory-card pattern-glow">
+                            <div class="card-meta"><i class="fas fa-microchip"></i> Tech Sector</div>
+                            <h4 class="card-title">The Deep-Tech Migration to T-Hub 2.0</h4>
+                            <p class="card-excerpt">A theoretical examination of why artificial intelligence and aerospace startups are favoring Hyderabad over legacy tech hubs. We break down the state subsidies, the availability of specialized compute infrastructure, and talent acquisition vectors.</p>
+                            <i class="fas fa-satellite reveal-icon"></i>
+                        </article>
+                        
+                        <article class="theory-card pattern-dots">
+                            <div class="card-meta"><i class="fas fa-tractor"></i> Rural Economy</div>
+                            <h4 class="card-title">The Efficacy of Direct Benefit Agrarian Transfers</h4>
+                            <p class="card-excerpt">Moving beyond government statistics, we apply economic theory to analyze the real-world inflation impact of direct cash injections into rural Telangana markets. How does this affect local purchasing power and subsequent crop yield investments?</p>
+                            <i class="fas fa-chart-pie reveal-icon"></i>
+                        </article>
+                        
+                        <article class="theory-card pattern-diagonal">
+                            <div class="card-meta"><i class="fas fa-monument"></i> Heritage Policy</div>
+                            <h4 class="card-title">The Paradox of Heritage Zoning Constraints</h4>
+                            <p class="card-excerpt">An analysis of the legal friction between modern high-density residential development and the rigid conservation laws protecting the architectural integrity of Hyderabad's historical quarters. Who wins when commerce meets history?</p>
+                            <i class="fas fa-archway reveal-icon"></i>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="category-view" id="interviews">
+                    <div class="category-header">
+                        <h2><i class="fas fa-microphone-alt"></i> The Q Tv Hotseat</h2>
+                        <p class="category-desc">Unfiltered, long-form dialogue with the individuals shaping regional architecture. Moderated strictly for facts. We replace theatrical shouting with high-level interrogative journalism designed to extract systemic truths.</p>
+                    </div>
+
+                    <article class="featured-card pattern-diagonal">
+                        <div class="card-meta"><span class="live-badge">UNCUT DIALOGUE</span> <i class="fas fa-user-tie"></i> Executive Branch</div>
+                        <h3 class="card-title">"The Budget is Math, Not Magic": Interrogating the Finance Secretary</h3>
+                        <p class="card-excerpt">In a rare, unedited exchange, the Q Tv desk presses the State Finance Secretary purely on macroeconomic realities. We bypass political talking points to focus entirely on debt-to-GDP thresholds, the mechanics of clearing contractor pending bills, and the volatile reliance on liquor excise taxes to fund sovereign guarantees.</p>
+                        <i class="fas fa-comments-dollar reveal-icon" style="font-size: 10rem; opacity: 0.2; bottom: -50px; right: -20px;"></i>
+                    </article>
+
+                    <div class="news-grid">
+                        <article class="theory-card pattern-glow">
+                            <div class="card-meta"><i class="fas fa-film"></i> Industry Leaders</div>
+                            <h4 class="card-title">The Algorithmic Future of Telugu Cinema Logistics</h4>
+                            <p class="card-excerpt">A theoretical discussion with a leading distributor regarding the collapse of traditional theatrical windows. We explore the economics of pan-India release structures, state-mandated ticket pricing caps, and the algorithmic pressure of OTT acquisitions.</p>
+                            <i class="fas fa-video reveal-icon"></i>
+                        </article>
+                        
+                        <article class="theory-card pattern-grid">
+                            <div class="card-meta"><i class="fas fa-leaf"></i> Voices of Dissent</div>
+                            <h4 class="card-title">Environmental Zoning vs. Industrial Reality</h4>
+                            <p class="card-excerpt">A rigorous debate with environmental litigators concerning the newly proposed coastal pharmaceutical corridors. We focus the conversation strictly on effluent discharge data, long-term soil toxicity modeling, and the legal definition of 'sustainable development'.</p>
+                            <i class="fas fa-microscope reveal-icon"></i>
+                        </article>
+                        
+                        <article class="theory-card pattern-dots">
+                            <div class="card-meta"><i class="fas fa-server"></i> Cyber Infrastructure</div>
+                            <h4 class="card-title">State-Level Cybersecurity and Data Sovereignty</h4>
+                            <p class="card-excerpt">An interview with the head of the regional cyber-defense wing detailing the theoretical vulnerabilities of integrating civil services with cloud infrastructure. We discuss data localization laws and the architecture of government data vaults.</p>
+                            <i class="fas fa-shield-alt reveal-icon"></i>
+                        </article>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted" style="font-size: 0.9rem;">© 2026 Q Tv Media Telugu. All rights reserved. Architected for speed, data, and absolute truth.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Theme Toggle Logic
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const body = document.body;
+            const icon = themeToggleBtn.querySelector('i');
+
+            const savedTheme = localStorage.getItem('qtv-theme') || 'dark';
+            body.setAttribute('data-theme', savedTheme);
+            updateIcon(savedTheme);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('qtv-theme', newTheme);
+                updateIcon(newTheme);
+            });
+
+            function updateIcon(theme) {
+                if (theme === 'light') {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                } else {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+            }
+
+            // 2. Hub Routing (Sidebar Tabs)
+            const navItems = document.querySelectorAll('.hub-nav-item');
+            const categoryViews = document.querySelectorAll('.category-view');
+
+            function switchCategory(targetId) {
+                navItems.forEach(item => {
+                    if (item.getAttribute('data-target') === targetId) {
+                        item.classList.add('active');
+                        if (window.innerWidth <= 768) {
+                            item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                        }
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+
+                categoryViews.forEach(view => {
+                    if (view.id === targetId) {
+                        view.classList.add('active');
+                    } else {
+                        view.classList.remove('active');
+                    }
+                });
+
+                if (window.innerWidth <= 768) {
+                    const contentArea = document.querySelector('.hub-content');
+                    contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const target = item.getAttribute('data-target');
+                    switchCategory(target);
+                    window.history.replaceState(null, null, `#${target}`);
+                });
+            });
+
+            // 3. Handle URL Hash on Initial Load
+            const hash = window.location.hash.replace('#', '');
+            const validTargets = ['politics', 'andhra', 'telangana', 'interviews'];
+            
+            if (hash && validTargets.includes(hash)) {
+                switchCategory(hash);
+            }
+        });
+    </script>
+</body>
+</html>
